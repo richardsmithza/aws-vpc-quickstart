@@ -61,13 +61,11 @@ Resources:
 
   QuickStartAttachIGW:
     Type: AWS::EC2::VPCGatewayAttachment
-    DependsOn: QuickStartIGW
     Properties:
       VpcId: !Ref QuickStartVPC
       InternetGatewayId: !Ref QuickStartIGW
   
   QuickStartPublicRouteTable:
-    DependsOn: QuickStartVPC
     Type: AWS::EC2::RouteTable
     Properties:
       VpcId: !Ref QuickStartVPC
@@ -87,7 +85,6 @@ Resources:
        GatewayId: !Ref QuickStartIGW            
   
   QuickStartPrivateRouteTable:
-    DependsOn: QuickStartVPC
     Type: AWS::EC2::RouteTable
     Properties:
       VpcId: !Ref QuickStartVPC
@@ -187,7 +184,6 @@ Resources:
   # Add Route in the Private Route Table to Public NAT Gateway 1a
   PrivateNGWRoute:
    Type: AWS::EC2::Route
-   DependsOn: Public1aNATGateway
    Properties:
       RouteTableId: !Ref QuickStartPrivateRouteTable
       DestinationCidrBlock: 0.0.0.0/0
